@@ -101,9 +101,7 @@ class Wall(QWidget):
         super().__init__();self.setWindowFlags(Qt.FramelessWindowHint|Qt.Tool);self.setAttribute(Qt.WA_NativeWindow,True)
         l=QVBoxLayout(self);l.setContentsMargins(0,0,0,0)
         self.v=QVideoWidget();self.v.setAspectRatioMode(Qt.KeepAspectRatioByExpanding);l.addWidget(self.v)
-        self.p=QMediaPlayer(self);self.p.setVideoOutput(self.v);self.p.mediaStatusChanged.connect(self.loop)
-    def loop(self,s):
-        if s==QMediaPlayer.EndOfMedia:self.p.setPosition(0);self.p.play()
+        self.p=QMediaPlayer(self);self.p.setVideoOutput(self.v);self.p.setLoops(QMediaPlayer.Loops.Infinite)
     def attach(self):
         self.show();h=int(self.winId());w=worker()
         if not w:return False
